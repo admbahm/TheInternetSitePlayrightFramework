@@ -7,15 +7,27 @@ This is a test framework for [The Internet](https://the-internet.herokuapp.com/)
 ```bash
 ├── pages/
 │ ├── init.py
+│ ├── base_page.py
 │ ├── login_page.py
 │ ├── secure_page.py
+│ ├── checkboxes_page.py
+│ ├── dropdown_page.py
+│ ├── forgot_password_page.py
 ├── tests/
 │ ├── init.py
 │ ├── test_login.py
+│ ├── test_checkboxes.py
+│ ├── test_dropdown.py
+│ ├── test_forgot_password.py
+├── .github/
+│ ├── workflows/
+│ ├── main.yml
 ├── .gitignore
 ├── README.md
+├── conftest.py
 ├── requirements.txt
-└── run_tests.py
+├── run_tests.py
+└── config.py
 ```
 ## Setup
 
