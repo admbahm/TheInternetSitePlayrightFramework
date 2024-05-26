@@ -1,3 +1,3 @@
-# config.py
+import os
 
-BASE_URL = "https://the-internet.herokuapp.com"
+BASE_URL = os.getenv("BASE_URL", "https://the-internet.herokuapp.com")

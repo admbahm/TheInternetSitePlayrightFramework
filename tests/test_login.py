@@ -4,7 +4,11 @@ from pages.secure_page import SecurePage
 from config import BASE_URL
 
 
-def test_valid_login(browser):
+@pytest.mark.parametrize("username, password, expected_message", [
+    ("tomsmith", "SuperSecretPassword!", "You logged into a secure area!"),
+    ("invalid_user", "invalid_password", "Your username is invalid!")
+])
+def test_login(browser, username, password, expected_message):
     login_page = LoginPage(browser)
     secure_page = SecurePage(browser)
 
@@ -12,10 +16,13 @@ def test_valid_login(browser):
     login_page.goto(f"{BASE_URL}/login")
 
     # Perform login
-    login_page.login("tomsmith", "SuperSecretPassword!")
+    login_page.login(username, password)
 
-    # Verify successful login
-    assert "You logged into a secure area!" in secure_page.get_flash_message()
+    # Verify the expected message
+    if username == "tomsmith":
+        assert expected_message in secure_page.get_flash_message()
+    else:
+        assert expected_message in browser.locator("#flash").text_content()
 
 
 def test_invalid_login(browser):

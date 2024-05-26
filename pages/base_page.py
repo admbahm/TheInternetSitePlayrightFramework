@@ -1,4 +1,4 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page, TimeoutError
 
 
 class BasePage:
@@ -6,4 +6,7 @@ class BasePage:
         self.page = page
 
     def goto(self, url: str):
-        self.page.goto(url)
+        try:
+            self.page.goto(url)
+        except TimeoutError:
+            raise Exception(f"Failed to load URL: {url}")

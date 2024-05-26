@@ -1,0 +1,41 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+        playwright install
+
+    - name: Run tests on ${{ matrix.browser }}
+      env:
+        BASE_URL: ${{ secrets.BASE_URL }}
+      run: |
+        source venv/bin/activate
+        pytest --browser ${{ matrix.browser }}
