@@ -3,9 +3,10 @@ from playwright.sync_api import sync_playwright
 
 
 @pytest.fixture(scope='function')
-def setup_teardown():
+def browser():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)
-        page = browser.new_page()
+        context = browser.new_context()
+        page = context.new_page()
         yield page
         browser.close()

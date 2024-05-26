@@ -1,15 +1,13 @@
+from pages.base_page import BasePage
 from playwright.sync_api import Page
 
 
-class LoginPage:
+class LoginPage(BasePage):
     def __init__(self, page: Page):
-        self.page = page
+        super().__init__(page)
         self.username_input = page.locator("#username")
         self.password_input = page.locator("#password")
         self.login_button = page.locator("button[type='submit']")
-
-    def goto(self):
-        self.page.goto("https://the-internet.herokuapp.com/login")
 
     def login(self, username: str, password: str):
         self.username_input.fill(username)
