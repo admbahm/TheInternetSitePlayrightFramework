@@ -61,4 +61,9 @@ python run_tests.py
 ```
 This will execute all tests in the tests directory
 
+An Extremely good tool for element definitions can be launched with:
+
+`npx playwright codegen https://the-internet.herokuapp.com/checkboxes
+`
+Where the url is whatever page you're testing.
 

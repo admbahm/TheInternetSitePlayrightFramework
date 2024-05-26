@@ -1,6 +1,10 @@
 import pytest
 from playwright.sync_api import sync_playwright
 from pages.checkboxes_page import CheckboxesPage
+# import os
+#
+# # Enable Playwright Inspector by setting PWDEBUG
+# os.environ['PWDEBUG'] = '1'
 
 
 def test_checkboxes():
